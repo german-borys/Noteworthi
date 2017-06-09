@@ -18,6 +18,10 @@ class NewNoteContainer extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
+  componentDidMount() {
+    console.log('new note container mounted')
+  }
+
   handleClick(e) {
     const { showAddNote } = this.props
     showAddNote()

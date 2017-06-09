@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Note from './Note'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = ({ notes }) => ({ notes })
 
@@ -24,4 +25,4 @@ class Notes extends Component {
 
 }
 
-export default connect(mapStateToProps)(Notes)
+export default withRouter(connect(mapStateToProps)(Notes))
