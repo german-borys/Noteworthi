@@ -26242,6 +26242,110 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _reactRedux = require('react-redux');
+
+var _TopToolbar = require('./TopToolbar');
+
+var _TopToolbar2 = _interopRequireDefault(_TopToolbar);
+
+var _Dashboard = require('./Dashboard');
+
+var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+var _NewNoteModal = require('./NewNoteModal');
+
+var _NewNoteModal2 = _interopRequireDefault(_NewNoteModal);
+
+var _Notes = require('./Notes');
+
+var _Notes2 = _interopRequireDefault(_Notes);
+
+var _actions = require('../actions');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var mapStateToProps = function mapStateToProps(_ref, _ref2) {
+  var addingNote = _ref.addingNote;
+  var match = _ref2.match;
+  return {
+    addingNote: addingNote,
+    match: match
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    addNote: function addNote(content) {
+      return dispatch((0, _actions.addNote)(content));
+    },
+    showAddNote: function showAddNote() {
+      return dispatch((0, _actions.showAddNote)());
+    },
+    hideAddNote: function hideAddNote() {
+      return dispatch((0, _actions.hideAddNote)());
+    }
+  };
+};
+
+var App = function (_Component) {
+  _inherits(App, _Component);
+
+  function App(props) {
+    _classCallCheck(this, App);
+
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+  }
+
+  _createClass(App, [{
+    key: 'render',
+    value: function render() {
+      console.log('App props', this.props);
+      var _props = this.props,
+          match = _props.match,
+          showAddNote = _props.showAddNote;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'main-wrapper' },
+        _react2.default.createElement(_TopToolbar2.default, { showAddNote: showAddNote }),
+        _react2.default.createElement(_NewNoteModal2.default, null),
+        _react2.default.createElement(_Notes2.default, null),
+        _react2.default.createElement(_reactRouterDom.Route, { path: match.url + '/dashboard', component: _Dashboard2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: match.url + '/new', component: _NewNoteModal2.default })
+      );
+    }
+  }]);
+
+  return App;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
+
+},{"../actions":260,"./Dashboard":262,"./NewNoteModal":265,"./Notes":267,"./TopToolbar":268,"react":243,"react-dom":53,"react-redux":188,"react-router-dom":205}],262:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -26266,22 +26370,23 @@ var _Notes2 = _interopRequireDefault(_Notes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App(_ref) {
+var Dashboard = function Dashboard(_ref) {
   var match = _ref.match;
 
   return _react2.default.createElement(
     'div',
-    { className: 'root' },
-    _react2.default.createElement(_TopToolbar2.default, null),
-    _react2.default.createElement(_NewNoteContainer2.default, null),
-    _react2.default.createElement(_Notes2.default, null),
-    _react2.default.createElement(_reactRouterDom.Route, { path: match.url + '/new', component: _NewNoteContainer2.default })
+    null,
+    _react2.default.createElement(
+      'h3',
+      null,
+      'Dashboard stuff'
+    )
   );
 };
 
-exports.default = App;
+exports.default = Dashboard;
 
-},{"./NewNoteContainer":263,"./Notes":265,"./TopToolbar":266,"react":243,"react-dom":53,"react-router-dom":205}],262:[function(require,module,exports){
+},{"./NewNoteContainer":264,"./Notes":267,"./TopToolbar":268,"react":243,"react-dom":53,"react-router-dom":205}],263:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26340,7 +26445,7 @@ var NewNote = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'new-note-form' },
         _react2.default.createElement('input', { type: 'text', ref: 'noteContent' }),
         _react2.default.createElement(
           'button',
@@ -26356,7 +26461,7 @@ var NewNote = function (_Component) {
 
 exports.default = NewNote;
 
-},{"react":243,"react-dom":53}],263:[function(require,module,exports){
+},{"react":243,"react-dom":53}],264:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26467,7 +26572,108 @@ var NewNoteContainer = function (_Component) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewNoteContainer);
 
-},{"../actions":260,"./NewNote":262,"react":243,"react-dom":53,"react-redux":188}],264:[function(require,module,exports){
+},{"../actions":260,"./NewNote":263,"react":243,"react-dom":53,"react-redux":188}],265:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRedux = require('react-redux');
+
+var _NewNote = require('./NewNote');
+
+var _NewNote2 = _interopRequireDefault(_NewNote);
+
+var _actions = require('../actions');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var addingNote = _ref.addingNote;
+  return { addingNote: addingNote };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    addNote: function addNote(content) {
+      return dispatch((0, _actions.addNote)(content));
+    },
+    showAddNote: function showAddNote() {
+      return dispatch((0, _actions.showAddNote)());
+    },
+    hideAddNote: function hideAddNote() {
+      return dispatch((0, _actions.hideAddNote)());
+    }
+  };
+};
+
+var NewNoteModal = function (_Component) {
+  _inherits(NewNoteModal, _Component);
+
+  function NewNoteModal(props) {
+    _classCallCheck(this, NewNoteModal);
+
+    var _this = _possibleConstructorReturn(this, (NewNoteModal.__proto__ || Object.getPrototypeOf(NewNoteModal)).call(this, props));
+
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(NewNoteModal, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('new note container mounted');
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(e) {
+      var showAddNote = this.props.showAddNote;
+
+      showAddNote();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          addingNote = _props.addingNote,
+          addNote = _props.addNote,
+          hideAddNote = _props.hideAddNote;
+
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        addingNote && _react2.default.createElement(_NewNote2.default, {
+          addNote: addNote,
+          hideAddNote: hideAddNote
+        })
+      );
+    }
+  }]);
+
+  return NewNoteModal;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewNoteModal);
+
+},{"../actions":260,"./NewNote":263,"react":243,"react-dom":53,"react-redux":188}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26510,7 +26716,7 @@ var Note = function Note(props) {
 
 exports.default = Note;
 
-},{"react":243,"react-dom":53}],265:[function(require,module,exports){
+},{"react":243,"react-dom":53}],267:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26577,38 +26783,42 @@ var Notes = function (_Component) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Notes));
 
-},{"./Note":264,"react":243,"react-dom":53,"react-redux":188,"react-router-dom":205}],266:[function(require,module,exports){
-'use strict';
+},{"./Note":266,"react":243,"react-dom":53,"react-redux":188,"react-router-dom":205}],268:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TopToolbar = function TopToolbar() {
+var TopToolbar = function TopToolbar(props) {
+  var showAddNote = props.showAddNote;
+
   return _react2.default.createElement(
-    'div',
-    { className: 'toolbar' },
+    "div",
+    { className: "toolbar" },
     _react2.default.createElement(
-      'h2',
+      "h2",
       null,
-      'Noteworthi'
-    )
+      "Noteworthi"
+    ),
+    _react2.default.createElement(
+      "button",
+      { onClick: showAddNote, className: "circular ui icon button" },
+      _react2.default.createElement("i", { className: "plus icon large" })
+    ),
+    _react2.default.createElement("div", { className: "toolbar-profile" })
   );
 };
 
 exports.default = TopToolbar;
 
-},{"react":243,"react-dom":53}],267:[function(require,module,exports){
+},{"react":243}],269:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26631,7 +26841,7 @@ var TopicNotes = function TopicNotes() {
 
 exports.default = TopicNotes;
 
-},{"react":243,"react-dom":53}],268:[function(require,module,exports){
+},{"react":243,"react-dom":53}],270:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -26656,13 +26866,13 @@ var _App = require('./components/App');
 
 var _App2 = _interopRequireDefault(_App);
 
+var _Dashboard = require('./components/Dashboard');
+
+var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
 var _Notes = require('./components/Notes');
 
 var _Notes2 = _interopRequireDefault(_Notes);
-
-var _NewNoteContainer = require('./components/NewNoteContainer');
-
-var _NewNoteContainer2 = _interopRequireDefault(_NewNoteContainer);
 
 var _TopicNotes = require('./components/TopicNotes');
 
@@ -26690,7 +26900,7 @@ function run() {
       null,
       _react2.default.createElement(
         'div',
-        null,
+        { className: 'root' },
         _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _App2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/topics/:topicName', component: _TopicNotes2.default })
       )
@@ -26702,7 +26912,7 @@ run();
 
 store.subscribe(run);
 
-},{"./components/App":261,"./components/NewNoteContainer":263,"./components/Notes":265,"./components/TopToolbar":266,"./components/TopicNotes":267,"./reducers":269,"react":243,"react-dom":53,"react-redux":188,"react-router-dom":205,"redux":249}],269:[function(require,module,exports){
+},{"./components/App":261,"./components/Dashboard":262,"./components/Notes":267,"./components/TopToolbar":268,"./components/TopicNotes":269,"./reducers":271,"react":243,"react-dom":53,"react-redux":188,"react-router-dom":205,"redux":249}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26739,4 +26949,4 @@ var notes = exports.notes = function notes(state, action) {
   }
 };
 
-},{"uuid/v4":257}]},{},[268]);
+},{"uuid/v4":257}]},{},[270]);

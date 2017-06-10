@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
   hideAddNote: () => dispatch(hideAddNote())
 })
 
-class NewNoteContainer extends Component {
+class NewNoteModal extends Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -31,11 +31,6 @@ class NewNoteContainer extends Component {
     const { addingNote, addNote, hideAddNote } = this.props
 
     return (
-      <div>
-        <button onClick={this.handleClick} className="ui basic button">
-          <i className="plus icon"></i>
-          Add Note
-        </button>
         <div>
         {addingNote &&
           <NewNote
@@ -43,9 +38,8 @@ class NewNoteContainer extends Component {
             hideAddNote={hideAddNote}
           />}
         </div>
-      </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewNoteContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(NewNoteModal)

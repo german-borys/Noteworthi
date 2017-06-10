@@ -21,7 +21,7 @@ class NewNote extends Component {
 
   render() {
     return (
-      <div>
+      <div className="new-note-form">
         <input type="text" ref="noteContent" />
         <button onClick={this.handleAddNote} className="ui basic button">
           Submit
