@@ -1,3 +1,7 @@
+div {
+  width: auto;
+}
+
 .sidebar {
   display: flex;
   flex: 1;
@@ -7,7 +11,7 @@
 }
 
 .content {
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 .card {
@@ -54,10 +58,17 @@
 
 }
 
-.new-note-form {
+/*
+FORM STYLES
+*/
+.form {
   width: 40rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 2rem 0;
+}
+
+.ui.form .field {
+  width: 100%;
 }

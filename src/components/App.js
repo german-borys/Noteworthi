@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import TopToolbar from './TopToolbar'
 import Dashboard from './Dashboard'
 import NewNoteModal from './NewNoteModal'
 import Notes from './Notes'
+import NoteContainer from './NoteContainer'
 
 import { addNote, showAddNote, hideAddNote } from '../actions'
 
-const mapStateToProps = ({ addingNote }, { match }) => ({
+const mapStateToProps = ({ notes, addingNote }, { match }) => ({
+  notes,
   addingNote,
   match
 })
@@ -27,14 +29,12 @@ class App extends Component {
   }
   render() {
     console.log('App props', this.props)
-    const { match, showAddNote } = this.props
+    const { notes, match, showAddNote } = this.props
     return (
       <div className="main-wrapper">
         <TopToolbar showAddNote={showAddNote}/>
         <NewNoteModal />
-        <Notes />
-        <Route path={`${match.url}/dashboard`} component={Dashboard}/>
-        <Route path={`${match.url}/new`} component={NewNoteModal}/>
+        <Notes notes={notes}/>
       </div>
     )
   }

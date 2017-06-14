@@ -1,43 +1,54 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import NewNote from './NewNote'
-import { addNote, showAddNote, hideAddNote } from '../actions'
+
+import { addNote, hideAddNote } from '../actions'
 
 const mapStateToProps = ({ addingNote }) => ({  addingNote  })
 
 const mapDispatchToProps = dispatch => ({
-  addNote: content => dispatch(addNote(content)),
-  showAddNote: () => dispatch(showAddNote()),
+  addNote: note => dispatch(addNote(note)),
   hideAddNote: () => dispatch(hideAddNote())
 })
 
 class NewNoteModal extends Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleAddNote = this.handleAddNote.bind(this)
   }
 
   componentDidMount() {
-    console.log('new note container mounted')
+    if (this.noteContent) this.noteContent.focus()
   }
 
-  handleClick(e) {
-    const { showAddNote } = this.props
-    showAddNote()
+  handleAddNote(e) {
+    const { addNote, hideAddNote } = this.props
+    addNote({ title: this.noteTitle.value, content: this.noteContent.value })
+    hideAddNote()
   }
 
   render() {
     const { addingNote, addNote, hideAddNote } = this.props
 
     return (
-        <div>
-        {addingNote &&
-          <NewNote
-            addNote={addNote}
-            hideAddNote={hideAddNote}
-          />}
-        </div>
+      <div>
+        {
+          addingNote &&
+          <div className=" ui form">
+            <div className="field">
+              <label>Title</label>
+              <input type="text" ref={(input) => this.noteTitle = input} />
+            </div>
+            <div className="field">
+              <label>Content</label>
+              <textarea ref={(input) => this.noteContent = input}></textarea>
+            </div>
+            <button onClick={this.handleAddNote} className="ui basic button">
+              Submit
+            </button>
+          </div>
+        }
+      </div>
     )
   }
 }

@@ -15,6 +15,12 @@ export const notes = (state, action) => {
         id: uuidv4()
       })
       return state.concat([newNote])
+    case 'DELETE_NOTE':
+      let noteIndex = state.findIndex((n) => n.id === action.data)
+      return [
+        ...state.slice(0, noteIndex),
+        ...state.slice(noteIndex + 1)
+      ]
     default:
       return state || []
   }

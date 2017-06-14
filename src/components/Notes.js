@@ -1,28 +1,36 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import Note from './Note'
+
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
-const mapStateToProps = ({ notes }) => ({ notes })
+const Notes = (props) => {
+    const { notes } = props
 
-class Notes extends Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    const { notes } = this.props
     return (
       <div className="content">
-      {
-        notes.map((note, key) =>
-          <Note key={key} content={note.content} />
-        )
-      }
+        <div className="ui relaxed divided list">
+          {
+            notes.map((note, key) =>
+              <NoteLink key={key} note={note} />
+            )
+          }
+        </div>
       </div>
     )
-  }
-
 }
 
-export default withRouter(connect(mapStateToProps)(Notes))
+const NoteLink = (props) => {
+  return (
+    <Link to={`notes/${props.note.id}`}>
+      <div className="item">
+        <div className="content">
+          <div className="header">{props.note.title}</div>
+          <div className="description">Created </div>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+export default Notes
