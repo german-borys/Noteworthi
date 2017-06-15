@@ -17,6 +17,7 @@
     "babelify": "^7.3.0",
     "history": "^4.6.2",
     "live-server": "^1.2.0",
+    "lodash": "^4.17.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",

@@ -9,23 +9,30 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import * as reducers from './reducers'
 
+import { loadState, saveState } from './localStorage'
+import throttle from 'lodash/throttle'
+
 import App from './components/App'
 import Dashboard from './components/Dashboard'
-import Notes from './components/Notes'
 import NoteContainer from './components/NoteContainer'
 import NewNoteModal from './components/NewNoteModal'
-import TopicNotes from './components/TopicNotes'
 import TopToolbar from './components/TopToolbar'
 
 const history = createHistory()
 const middleware = routerMiddleware(history)
+const persistedState = loadState()
 const store = createStore(
   combineReducers({
     ...reducers,
     router: routerReducer
-  }),
+  }), persistedState,
   applyMiddleware(middleware)
 )
+
+store.subscribe(throttle(() => {
+  //save any state changes but don't save more than once a sec
+  saveState({ notes: store.getState().notes })
+}, 1000))
 
 function run() {
   let state = store.getState()
@@ -35,8 +42,8 @@ function run() {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <div>
+            <TopToolbar />
             <Route exact path="/" component={App} />
-            <Route path="/topics/:topicName" component={TopicNotes} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/notes/:noteId" component={NoteContainer} />
             <Route path="/new" component={NewNoteModal} />

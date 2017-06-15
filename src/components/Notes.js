@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-
 import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
+
+import timeConverter from '../helper-functions/dateFunctions'
 
 const Notes = (props) => {
     const { notes } = props
@@ -20,17 +21,24 @@ const Notes = (props) => {
     )
 }
 
-const NoteLink = (props) => {
-  return (
-    <Link to={`notes/${props.note.id}`}>
-      <div className="item">
-        <div className="content">
-          <div className="header">{props.note.title}</div>
-          <div className="description">Created </div>
-        </div>
+class NoteLink extends Component {
+  constructor(props) {
+    super(props)
+
+  }
+  render() {
+    const {title, created} = this.props.note
+    return (
+      <div onMouseEnter={this.props.handleHover} className="item">
+        <Link to={`notes/${this.props.note.id}`}>
+          <div className="content">
+            <div className="header">{title}</div>
+            <div className="description">Created: {timeConverter(created)}</div>
+          </div>
+        </Link>
       </div>
-    </Link>
-  )
+    )
+  }
 }
 
 export default Notes

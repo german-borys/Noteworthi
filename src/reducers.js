@@ -12,7 +12,9 @@ export const notes = (state, action) => {
   switch (action.type) {
     case 'ADD_NOTE':
       let newNote = Object.assign({}, action.data, {
-        id: uuidv4()
+        id: uuidv4(),
+        created: +new Date,
+        updated: +new Date
       })
       return state.concat([newNote])
     case 'DELETE_NOTE':

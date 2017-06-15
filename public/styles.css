@@ -12,6 +12,7 @@ div {
 
 .content {
   margin: 1rem 0;
+  min-width: 30rem;
 }
 
 .card {
@@ -45,7 +46,7 @@ div {
   width: 100%;
   height: 60px;
   background-color: #50E3C2;
-  padding-left: 3rem;
+  padding: 0 3rem;
 }
 
 .toolbar h2 {
@@ -63,10 +64,7 @@ FORM STYLES
 */
 .form {
   width: 40rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 2rem 0;
+  margin: 2rem auto;
 }
 
 .ui.form .field {

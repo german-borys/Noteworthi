@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Route, withRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import TopToolbar from './TopToolbar'
@@ -32,8 +32,6 @@ class App extends Component {
     const { notes, match, showAddNote } = this.props
     return (
       <div className="main-wrapper">
-        <TopToolbar showAddNote={showAddNote}/>
-        <NewNoteModal />
         <Notes notes={notes}/>
       </div>
     )

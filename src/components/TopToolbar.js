@@ -1,15 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-
-const TopToolbar = (props) => {
-    const { showAddNote } = props
+const TopToolbar = () => {
     return (
       <div className="toolbar">
        <h2>Noteworthi</h2>
-       <button onClick={showAddNote} className="circular ui icon button">
+       <Link to="/new" className="circular ui icon button">
          <i className="plus icon large"></i>
-       </button>
-       <div className="toolbar-profile"></div>
+       </Link>
       </div>
     )
 }
